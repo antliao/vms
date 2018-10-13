@@ -20,9 +20,9 @@ function add_vtype_form()
 	echo "<table border=\"2\" style=\"width: 800px\">\n" ;
 	echo "<tbody>\n" ;
 	echo "<tr><td>名稱</td><td>開始日期</td><td>結束日期</td><td>狀態</td><td>備註</td></tr>\n" ;
-	echo "<tr><td><input type=\"text\" name=\"vtype_name\" maxlength=\"25\"</td>" ;
-	echo "<td><input type=\"text\" name=\"vtype_sdate\" maxlength=\"25\"</td>" ;
-	echo "<td><input type=\"text\" name=\"vtype_edate\" maxlength=\"25\"</td>" ;
+	echo "<tr><td><input type=\"text\" name=\"vtype_name\" maxlength=\"25\"></td>" ;
+	echo "<td><input type=\"text\" name=\"vtype_sdate\" maxlength=\"25\" disabled></td>" ;
+	echo "<td><input type=\"text\" name=\"vtype_edate\" maxlength=\"25\" disabled></td>" ;
 	echo "<td><select name=\"vtype_status\"><option value=\"1\">啟用</option><option value=\"0\">停用</option></select></td>" ;
 	echo "<td><textarea name=\"vtype_remark\" cols=\"50\" rows=\"5\"></textarea></td></tr>\n" ;
 	echo "</table>\n" ;
