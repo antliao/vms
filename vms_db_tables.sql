@@ -13,8 +13,8 @@ CREATE TABLE `vms_db`.`vms_users`
 CREATE TABLE `vms_db`.`vtype`
 ( `id` INT NOT NULL AUTO_INCREMENT , 
   `name` VARCHAR(30) NOT NULL , 
-  `sdate` date NOT NULL,
-  `edate` date NOT NULL,
+  `sdate` date NULL,
+  `edate` date NULL,
   `status` INT NOT NULL DEFAULT '1' , 
   `remark` TEXT NULL ,
     PRIMARY KEY (`id`),
