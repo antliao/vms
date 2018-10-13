@@ -26,7 +26,7 @@ function add_vtype_form()
 	echo "<td><select name=\"vtype_status\"><option value=\"1\">啟用</option><option value=\"0\">停用</option></select></td>" ;
 	echo "<td><textarea name=\"vtype_remark\" cols=\"50\" rows=\"5\"></textarea></td></tr>\n" ;
 	echo "</table>\n" ;
-	echo "<br><br><input type=\"submit\" name=\"Vadd\" value=\"新增\">\n" ;
+	echo "<br><br><input type=\"submit\" name=\"add_vtype\" value=\"新增\">\n" ;
 	echo "</center></form>\n" ;
 }
 
