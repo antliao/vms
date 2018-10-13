@@ -14,31 +14,37 @@ $Vadd = $_POST['Vadd'] ;
 
 if($Vadd != null)
 {
-	doaddV() ;
+	doaddV($conn) ;
 }
 
-function doaddV()
+function doaddV($con)
 {
 	$Vname = $_POST['Vname'] ;
 	$Vsex = $_POST['Vsex'] ;
-	$Vclass = $_POST['Vclass'] ;
+	$Vlocation = $_POST['Vlocation'] ;
+	$Vclass_num = $_POST['Vclass_num'] ;
 	$Vstatus = $_POST['Vstatus'] ;
 	$Vremark = $_POST['Vremark'] ;
 
-	if($Vname != null && $Vsex != null && $Vclass != null && $Vstatus != null)
+	if($Vname != null && $Vsex != null && $Vlocation != null && $Vclass_num != null && $Vstatus != null)
 	{
-		$sql = "INSERT INTO vul_management SET name=\'$Vname\', sex=\'$Vsex\', class=\'$Vclass\', status=\'$Vstatus\'" ;
-		if($Vremard != null)
+		$sql = "INSERT INTO volun_man SET name='$Vname', sex=$Vsex, location='$Vlocation', class_num=$Vclass_num, status=$Vstatus" ;
+		//echo $sql . "<br>" ;
+		if($Vremark != null)
 		{
-			$sql = $sql . ", remark=\"$Vremark\"" ;
+			$sql = $sql . ", remark='$Vremark'" ;
+			//echo $sql . "<br>" ;
 		}
-		if(!$res = $conn->query($sql))
+		if(!$res = $con->query($sql))
 		{
-			echo "新增義工資料失敗" ;
+			echo "執行新增義工資料失敗" ;
+			echo '<meta http-equiv=REFRESH CONTENT=2;url="vms_man.php">' ;
+		} else {
+			echo "新增義工資料成功" ;
 			echo '<meta http-equiv=REFRESH CONTENT=2;url="vms_man.php">' ;
 		}
 	} else {
-		echo "新增義工資料失敗" ;
+		echo "填寫資料不完整, 新增義工資料失敗" ;
 		echo '<meta http-equiv=REFRESH CONTENT=2;url="vms_man.php">' ;
 		//vms_leave_page() ;
 	}
