@@ -42,7 +42,7 @@ function add_atten_form($con)
 	echo "<br><br><hr>\n<h2>義工簽到填寫</h2><br>\n" ;
 	echo "<table border=\"2\" style=\"width: 800px\">\n" ;
 	echo "<tbody>\n" ;
-	echo "<tr><td>日期</td><td>組別</td><td>姓名</td><td>起時</td><td>起分</td><td>迄時</td><td>迄分</td></tr>\n" ;
+	echo "<tr><td>日期</td><td>組別</td><td>姓名</td><td>起時</td><td>起分</td><td>迄時</td><td>迄分</td><td>狀態</td><td>備註</td></tr>\n" ;
 	echo "<tr><td><input type=\"text\" name=\"att_date\" maxlength=\"20\"</td>" ;
 	echo "<td><select name=\"vtype_name\">" ;
 	print_vtype_name_opt($con) ;
@@ -56,7 +56,19 @@ function add_atten_form($con)
 	print_stime_h_opt() ;
 	echo "</select></td>" ;
 
-	echo "<td><select name=\"stime_h\"><option value=\"1\">啟用</option><option value=\"0\">停用</option></select></td>" ;
+	echo "<td><select name=\"stime_m\">" ;
+	print_stime_m_opt() ;
+	echo "</select></td>" ;
+
+	echo "<td><select name=\"etime_h\">" ;
+	print_etime_h_opt() ;
+	echo "</select></td>" ;
+
+	echo "<td><select name=\"etime_m\">" ;
+	print_etime_m_opt() ;
+	echo "</select></td>" ;
+
+	echo "<td><select name=\"att_status\"><option value=\"1\">啟用</option><option value=\"0\">停用</option></select></td>" ;
 	echo "<td><textarea name=\"att_remark\" cols=\"50\" rows=\"5\"></textarea></td></tr>\n" ;
 	echo "</table>\n" ;
 	echo "<br><br><input type=\"submit\" name=\"att_add\" value=\"新增\">\n" ;
@@ -73,7 +85,7 @@ function print_vtype_name_opt($con)
 		if($result->num_rows > 0)
 		{
 			while ($row = $result->fetch_assoc()) {
-				echo "<option value=\"$row['name']\">$row['name']</option>" ;
+				echo "<option value=\"" . $row['name'] . "\">" . $row['name'] . "</option>" ;
 			}
 		}
 	}
@@ -89,7 +101,7 @@ function print_volun_man_name_opt($con)
 		if($result->num_rows > 0)
 		{
 			while ($row = $result->fetch_assoc()) {
-				echo "<option value=\"$row['name']\">$row['name']</option>" ;
+				echo "<option value=\"". $row['name'] . "\">" . $row['name'] . "</option>" ;
 			}
 		}
 	}
@@ -97,7 +109,31 @@ function print_volun_man_name_opt($con)
 
 function print_stime_h_opt()
 {
-	for($i=0; $i<23; $i++)
+	for($i=0; $i<24; $i++)
+	{
+		echo "<option value=\"$i\">$i</option>" ;
+	}
+}
+
+function print_stime_m_opt()
+{
+	for($i=0; $i<60; $i=$i+10)
+	{
+		echo "<option value=\"$i\">$i</option>" ;
+	}
+}
+
+
+function print_etime_h_opt()
+{
+	for($i=0; $i<24; $i++)
+	{
+		echo "<option value=\"$i\">$i</option>" ;
+	}
+}
+function print_etime_m_opt()
+{
+	for($i=0; $i<60; $i=$i+10)
 	{
 		echo "<option value=\"$i\">$i</option>" ;
 	}
