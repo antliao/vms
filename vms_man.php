@@ -1,11 +1,16 @@
 <?php session_start(); ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
-header("Content-Type:text/html; charset=utf-8");
-
 //general start -- important
 include("vms_db_inc.php");
 include("vms_common.php");
+$js = '<script>
+	$( function() {
+		$( "#datepicker" ).datepicker();
+	} );
+	</script>' ;
+print_page_start('VMS 義工管理', $js) ;
+
 vms_checkLogin() ;
 
 vms_menu_page() ;
@@ -43,7 +48,7 @@ function add_atten_form($con)
 	echo "<table border=\"2\" style=\"width: 800px\">\n" ;
 	echo "<tbody>\n" ;
 	echo "<tr><td>日期</td><td>組別</td><td>姓名</td><td>起時</td><td>起分</td><td>迄時</td><td>迄分</td><td>狀態</td><td>備註</td></tr>\n" ;
-	echo "<tr><td><input type=\"text\" name=\"att_date\" maxlength=\"20\"</td>" ;
+	echo "<tr><td><input type=\"text\" id=\"datepicker\" name=\"att_date\" maxlength=\"20\"</td>" ;
 	echo "<td><select name=\"vtype_name\">" ;
 	print_vtype_name_opt($con) ;
 	echo "</select></td>" ;

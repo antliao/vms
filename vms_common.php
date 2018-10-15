@@ -23,4 +23,20 @@ function vms_checkLogin()
 	}
 }
 
+function print_page_start($t,$js)
+{
+	$p = '<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>' . 
+$t . 
+'</title>
+<link rel="stylesheet" href="./jq/jquery-ui.css">
+<script src="./jq/jquery-1.12.4.js"></script>
+<script src="./jq/jquery-ui.js"></script>' .
+$js .
+'</head>' ;
+	echo $p ;
+}
+
 ?>
