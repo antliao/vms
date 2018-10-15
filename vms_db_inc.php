@@ -18,4 +18,7 @@ $conn = new mysqli($db_server, $db_user, $db_passwd, $db_name) ;
 if($conn->connect_error)
 	die("無法對資料庫連線" . $conn->connect_error);
 
+if(!$conn->set_charset("utf8"))
+	die("can't set char: " . $conn->error);
+
 ?>
