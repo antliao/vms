@@ -1,0 +1,16 @@
+Install VMS in Ubuntu16.04
+1. apt-get install mysql-server
+2. enble https for apache2
+	a. https://www.server-world.info/en/note?os=Ubuntu_16.04&p=httpd&f=8
+	b. 
+		1. vi /etc/apache2/sites-available/default-ssl.conf
+			# line 3: change admin email
+			ServerAdmin webmaster@srv.world
+			# line 32,33: change to the one created above
+			SSLCertificateFile /etc/ssl/private/server.crt
+			SSLCertificateKeyFile /etc/ssl/private/server.key
+		2. a2ensite default-ssl 
+			
+		3. a2enmod ssl 
+		4. service apache2 restart
+
