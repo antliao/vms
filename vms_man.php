@@ -20,8 +20,8 @@ vms_menu_page() ;
 
 			
 
-addV_form() ; //新增義工的 form
 add_atten_form($conn) ; //義工簽到的 form
+addV_form() ; //新增義工的 form
 
 
 function addV_form()
