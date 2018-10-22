@@ -50,34 +50,14 @@ function add_atten_form($con)
 	echo "<br><br><hr>\n<h2>義工簽到填寫</h2><br>\n" ;
 	echo "<table border=\"2\" style=\"width: 800px\">\n" ;
 	echo "<tbody>\n" ;
-	echo "<tr><td>日期</td><td>組別</td><td>姓名</td><td>起時</td><td>起分</td><td>迄時</td><td>迄分</td><td>狀態</td><td>備註</td></tr>\n" ;
+	echo "<tr><td>日期</td><td>組別</td><td>姓名(每個姓名間請以半形逗號分隔)</td><td>備註</td></tr>\n" ;
 	echo "<tr><td><input type=\"text\" id=\"datepicker\" readonly=\"readonly\" name=\"att_date\" maxlength=\"20\"</td>" ;
 	echo "<td><select name=\"vtype_name\">" ;
 	print_vtype_name_opt($con) ;
 	echo "</select></td>" ;
 
-	echo "<td><select name=\"volun_man_name\">" ;
-	print_volun_man_name_opt($con) ;
-	echo "</select></td>" ;
-
-	echo "<td><select name=\"stime_h\">" ;
-	print_stime_h_opt() ;
-	echo "</select></td>" ;
-
-	echo "<td><select name=\"stime_m\">" ;
-	print_stime_m_opt() ;
-	echo "</select></td>" ;
-
-	echo "<td><select name=\"etime_h\">" ;
-	print_etime_h_opt() ;
-	echo "</select></td>" ;
-
-	echo "<td><select name=\"etime_m\">" ;
-	print_etime_m_opt() ;
-	echo "</select></td>" ;
-
-	echo "<td><select name=\"att_status\"><option value=\"1\">啟用</option><option value=\"0\">停用</option></select></td>" ;
-	echo "<td><textarea name=\"att_remark\" cols=\"50\" rows=\"5\"></textarea></td></tr>\n" ;
+	echo "<td><textarea name=\"att_names\" cols=\"50\" rows=\"10\"></textarea></td>\n" ;
+	echo "<td><textarea name=\"att_remark\" cols=\"50\" rows=\"10\"></textarea></td></tr>\n" ;
 	echo "</table>\n" ;
 	echo "<br><br><input type=\"submit\" name=\"att_add\" value=\"新增\">\n" ;
 	echo "</center></form>\n" ;
