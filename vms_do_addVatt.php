@@ -88,6 +88,9 @@ function doaddVatt_do($con)
 	}
 	echo "</pre>" ;
 
+	echo "新增義工簽到資料完成" ;
+	echo '<meta http-equiv=REFRESH CONTENT=2;url="vms_man.php">' ;
+
 }
 
 function do_insert_new($name, $con)
@@ -129,8 +132,8 @@ function doaddVatt($con)
 
 	if($att_date != null && $vtype_id != null && $att_names != null)
 	{
-		echo '<pre>' . $att_names . '</pre>' ;
-		echo '<hr>' ;
+		//echo '<pre>' . $att_names . '</pre>' ;
+		//echo '<hr>' ;
 		$att_names_h = check_attnames($att_names, $con) ;
 		if($att_names_h == null)
 		{
@@ -149,6 +152,7 @@ function print_confirm_att_names_forms($att_names_hh, $att_d, $vt_id, $att_r)
 {
 	echo "<form action=\"vms_do_addVatt.php\" method=\"post\">" ;
 	echo "<center>\n" ;
+	echo "<h2>請確認以下資料是否正確以進行新增" . $att_d . "義工簽到</h2><br>" ;
 
 	echo "<input type=\"hidden\" name=\"attd\" value=\"" . $att_d . "\">" ;
 	echo "<input type=\"hidden\" name=\"vtid\" value=\"" . $vt_id . "\">" ;
