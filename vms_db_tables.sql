@@ -31,8 +31,7 @@ CREATE TABLE `vms_db`.`volun_man`
   `class_num` INT NULL , 
   `status` INT NOT NULL DEFAULT '1' , 
   `remark` TEXT NULL ,
-    PRIMARY KEY (`id`),
-    UNIQUE (`name`)
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci
   COMMENT = 'volunteers for vms system';
 

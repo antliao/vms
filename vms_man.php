@@ -52,7 +52,7 @@ function add_atten_form($con)
 	echo "<tbody>\n" ;
 	echo "<tr><td>日期</td><td>組別</td><td>姓名(每個姓名間請以半形逗號分隔)</td><td>備註</td></tr>\n" ;
 	echo "<tr><td><input type=\"text\" id=\"datepicker\" readonly=\"readonly\" name=\"att_date\" maxlength=\"20\"</td>" ;
-	echo "<td><select name=\"vtype_name\">" ;
+	echo "<td><select name=\"vtype_id\">" ;
 	print_vtype_name_opt($con) ;
 	echo "</select></td>" ;
 
@@ -65,7 +65,7 @@ function add_atten_form($con)
 
 function print_vtype_name_opt($con)
 {
-	$vtype_sql = "SELECT name FROM vtype" ;
+	$vtype_sql = "SELECT * FROM vtype" ;
 	if(!$result = $con->query($vtype_sql))
 	{
 		echo 'vtype query failed';
@@ -73,7 +73,7 @@ function print_vtype_name_opt($con)
 		if($result->num_rows > 0)
 		{
 			while ($row = $result->fetch_assoc()) {
-				echo "<option value=\"" . $row['name'] . "\">" . $row['name'] . "</option>" ;
+				echo "<option value=\"" . $row['id'] . "\">" . $row['name'] . "</option>" ;
 			}
 		}
 	}
