@@ -14,3 +14,7 @@ Install VMS in Ubuntu16.04
 		3. a2enmod ssl 
 		4. service apache2 restart
 
+
+20181103
+1. class table, location table. for example, 台北 39 期
+2. edit apache config to disable port 80

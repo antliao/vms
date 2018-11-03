@@ -52,3 +52,26 @@ CREATE TABLE `vms_db`.`volun_atten`
     FOREIGN KEY (`volun_man_id`) REFERENCES volun_man(`id`)
 ) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci
   COMMENT = 'attendency of volunteers for vms system';
+
+CREATE TABLE `vms_db`.`class_location`
+( `id` INT NOT NULL AUTO_INCREMENT , 
+  `name` VARCHAR(30) NOT NULL , 
+  `status` INT NOT NULL DEFAULT '1' , 
+  `remark` TEXT NULL ,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci
+  COMMENT = 'class location';
+
+CREATE TABLE `vms_db`.`class`
+( `id` INT NOT NULL AUTO_INCREMENT , 
+  `num` INT NOT NULL , 
+  `loc_id` INT NOT NULL , 
+  `start_date` date NULL ,
+  `embrace_date` date NULL , 
+  `status` INT NOT NULL DEFAULT '1' , 
+  `remark` TEXT NULL ,
+    UNIQUE (`id`) ,
+    FOREIGN KEY (`loc_id`) REFERENCES class_location(`id`) ,
+    CONSTRAINT loc_num PRIMARY KEY (num,loc_id)
+) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci
+  COMMENT = 'class location';

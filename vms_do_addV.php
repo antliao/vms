@@ -38,14 +38,14 @@ function doaddV($con)
 		if(!$res = $con->query($sql))
 		{
 			echo "執行新增義工資料失敗" ;
-			echo '<meta http-equiv=REFRESH CONTENT=2;url="vms_man.php">' ;
+			echo '<meta http-equiv=REFRESH CONTENT=2;url="vms_class.php">' ;
 		} else {
 			echo "新增義工資料成功" ;
-			echo '<meta http-equiv=REFRESH CONTENT=2;url="vms_man.php">' ;
+			echo '<meta http-equiv=REFRESH CONTENT=2;url="vms_class.php">' ;
 		}
 	} else {
 		echo "填寫資料不完整, 新增義工資料失敗" ;
-		echo '<meta http-equiv=REFRESH CONTENT=2;url="vms_man.php">' ;
+		echo '<meta http-equiv=REFRESH CONTENT=2;url="vms_class.php">' ;
 		//vms_leave_page() ;
 	}
 }
