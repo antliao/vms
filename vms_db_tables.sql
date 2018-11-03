@@ -47,6 +47,8 @@ CREATE TABLE `vms_db`.`volun_atten`
   `etime_m` INT NULL , 
   `status` INT NOT NULL DEFAULT '1' , 
   `remark` TEXT NULL ,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`) ,
+    FOREIGN KEY (`vtype_id`) REFERENCES vtype(`id`) ,
+    FOREIGN KEY (`volun_man_id`) REFERENCES volun_man(`id`)
 ) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci
   COMMENT = 'attendency of volunteers for vms system';
