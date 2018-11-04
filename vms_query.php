@@ -108,17 +108,18 @@ function show_single_query($con, $vtypeA)
 		return ;
 
 
-	$sql = "SELECT * FROM volun_atten WHERE date BETWEEN '$sdate' AND '$edate' AND volun_man_id = '$volun_man_id'" ;
+	$sql = "SELECT * FROM volun_atten WHERE date BETWEEN '$sdate' AND '$edate' AND volun_man_id = '$volun_man_id' ORDER BY date" ;
 	//echo $sql ;
 	//exit;
 	if(!$result = $con->query($sql))
 	{
 		echo 'query failed' ;
 	} else {
+		$member_name = get_member_name_by_id($con, $volun_man_id) ;
 		if($result->num_rows > 0)
 		{
 		    echo "<center>\n" ;
-			echo '<br><br><hr><h3>義工：' . $volun_man_id . '於&nbsp;&nbsp;' . $sdate . '&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;' . $edate . '&nbsp;&nbsp;共有&nbsp;' . $result->num_rows . '&nbsp;筆參與工作紀錄</h3><br>' ;
+			echo '<br><br><h3>義工：' . $member_name . '於&nbsp;&nbsp;' . $sdate . '&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;' . $edate . '&nbsp;&nbsp;共有&nbsp;' . $result->num_rows . '&nbsp;筆參與工作紀錄</h3><br>' ;
 
 			echo "<table border=\"2\" style=\"width: 800px\">\n" ;
 			echo "<tbody>\n" ;
@@ -133,6 +134,25 @@ function show_single_query($con, $vtypeA)
 		    echo "<center>\n" ;
 			echo '<br><br><hr><h3>義工：' . $volun_man_id . '於&nbsp;&nbsp;' . $sdate . '&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;' . $edate . '&nbsp;&nbsp;間無工作紀錄</h3><br>' ;
 			echo "</center>\n" ;
+		}
+	}
+}
+
+function get_member_name_by_id($con, $id)
+{
+	$sql = "SELECT name FROM volun_man WHERE id=$id" ;
+	if(!$result = $con->query($sql))
+	{
+		echo 'query name from volun_man failed' ;
+		exit ;
+	} else {
+		if($result->num_rows > 0)
+		{
+			$row = $result->fetch_assoc() ;
+			return $row['name'] ;
+		} else {
+			echo 'no id in volun_man' ;
+			exit ;
 		}
 	}
 }
@@ -165,7 +185,7 @@ function show_all_query($con, $vtA, $vlA)
 		return ;
 
 
-	$sql = "SELECT * FROM volun_atten WHERE date BETWEEN '$sdate' AND '$edate'" ;
+	$sql = "SELECT * FROM volun_atten WHERE date BETWEEN '$sdate' AND '$edate' ORDER BY date" ;
 	//echo $sql ;
 	//exit;
 	if(!$result = $con->query($sql))
@@ -175,7 +195,7 @@ function show_all_query($con, $vtA, $vlA)
 		if($result->num_rows > 0)
 		{
 		    echo "<center>\n" ;
-			echo '<br><br><hr><h3>於&nbsp;&nbsp;' . $sdate . '&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;' . $edate . '&nbsp;&nbsp;共有&nbsp;' . $result->num_rows . '&nbsp;筆工作紀錄</h3><br>' ;
+			echo '<br><br><h3>於&nbsp;&nbsp;' . $sdate . '&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;' . $edate . '&nbsp;&nbsp;共有&nbsp;' . $result->num_rows . '&nbsp;筆工作紀錄</h3><br>' ;
 			echo "<table border=\"2\" style=\"width: 800px\">\n" ;
 			echo "<tbody>\n" ;
 			echo "<tr><td>姓名</td><td>工作群組</td><td>日期</td></tr>" ;
