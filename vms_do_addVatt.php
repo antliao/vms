@@ -56,7 +56,7 @@ function doaddVatt_do($con)
 	{
 		$c = count($mulL) ;
 	}
-	echo "<br><pre>" ;
+	echo "<br>" ;
 	for($i=0;$i<$c;$i=$i+2)
 	{
 		$j = $i + 1 ;
@@ -67,7 +67,6 @@ function doaddVatt_do($con)
 			do_insert_att($mulL[$j], $attd, $vtid, $con) ;
 		}
 	}
-	echo "</pre>" ;
 
 	//insert the records no name matched
 	$newL = $_POST['newlist'] ;
@@ -140,15 +139,15 @@ function doaddVatt($con)
 			echo 'parsing names failed' ;
 			exit ;
 		} else {
-			echo '<pre>' ;
-			print_confirm_att_names_forms($att_names_h, $att_date, $vtype_id, $att_remark) ;
-			echo '</pre>' ;
+			//echo '<pre>' ;
+			print_confirm_att_names_forms($att_names_h, $att_date, $vtype_id, $att_remark, $con) ;
+			//echo '</pre>' ;
 		}
 	}
 
 }
 
-function print_confirm_att_names_forms($att_names_hh, $att_d, $vt_id, $att_r)
+function print_confirm_att_names_forms($att_names_hh, $att_d, $vt_id, $att_r, $con)
 {
 	echo "<form action=\"vms_do_addVatt.php\" method=\"post\">" ;
 	echo "<center>\n" ;
@@ -159,7 +158,8 @@ function print_confirm_att_names_forms($att_names_hh, $att_d, $vt_id, $att_r)
 	if($att_r != null)
 		echo "<input type=\"hidden\" name=\"attr\" value=\"" . $att_r . "\">" ;
 
-	echo "<br><br><hr>\n<h2>義工(學員資料無符合姓名)</h2><br>\n" ;
+	echo "<br><br><hr>\n<h2>義工(學員資料無符合姓名)<br>\n" ;
+	echo "<font color=\"red\"> 注意！若送出此資料，將會自動新增至學員資料庫</font></h2><br>\n" ;
 	echo "<table border=\"2\" style=\"width: 600px\">\n" ;
 	echo "<tbody>\n" ;
 	$c = count($att_names_hh[0]) ;
@@ -174,20 +174,21 @@ function print_confirm_att_names_forms($att_names_hh, $att_d, $vt_id, $att_r)
 	echo "<br><br><hr>\n<h2>義工(學員資料一筆姓名符合)</h2><br>\n" ;
 	echo "<table border=\"2\" style=\"width: 600px\">\n" ;
 	echo "<tbody>\n" ;
+	echo "<tr><td>姓名</td><td>資訊</td></tr>" ;
 	$c = count($att_names_hh[1]) ;
 	for($i=0; $i<$c; $i++)
 	{
+		$loc_name = get_loc_name_by_id($att_names_hh[1][$i][3], $con) ;
 		echo "<tr>" ;
 		echo "<td>" . $att_names_hh[1][$i][0] . "</td>" ;
-		echo "<td><table border=\"1\" width=\"100%\"><tr><td>Dist</td><td>class</td><td><input type=\"checkbox\" checked=\"checked\" name=\"onelist[]\" value=\"" . $att_names_hh[1][$i][1] . "\"></td></tr></table></td></tr>" ;
-		//echo "<td><input type=\"checkbox\" checked=\"checked\" name=\"onelist[]\" value=\"" . $att_names_hh[1][$i][1] . "\"></td></tr>" ;
-		//echo "<tr><td>" . $att_names_hh[1][$i][0] . "</td><td>" . $att_names_hh[1][$i][1] . "</td><td>" . $att_names_hh[1][$i][2] . "</td></tr>" ;
+		echo "<td><table border=\"1\" width=\"100%\"><tr><td>" . $loc_name . "</td><td>" . $att_names_hh[1][$i][4] . "</td><td><input type=\"checkbox\" checked=\"checked\" name=\"onelist[]\" value=\"" . $att_names_hh[1][$i][1] . "\"></td></tr></table></td></tr>" ;
 	}
 	echo "</tbody></table>" ;
 
 	echo "<br><br><hr>\n<h2>義工(學員資料多筆姓名符合)</h2><br>\n" ;
 	echo "<table border=\"2\" style=\"width: 600px\">\n" ;
 	echo "<tbody>\n" ;
+	echo "<tr><td>姓名</td><td>資訊</td></tr>" ;
 	$c = count($att_names_hh[2]) ;
 	for($i=0; $i<$c; $i++)
 	{
@@ -196,11 +197,13 @@ function print_confirm_att_names_forms($att_names_hh, $att_d, $vt_id, $att_r)
 		$l = $k + 1 ;
 		echo "<tr><td>" . $att_names_hh[2][$i][0] . "</td>" ;
 		echo "<td>" ;
-		for($j=1; $j<$c2; $j=$j+2)
+		for($j=1; $j<$c2; $j=$j+4)
 		{
-			echo "<table border=\"1\" width=\"100%\"><tr><td>Dist</td><td>class</td><td><input type=\"radio\" name=\"mullist[" . $l . "]\" value=\"" . $att_names_hh[2][$i][$j] . "\" checked></td></tr></table>" ;
-			//echo "<table border=\"1\" width=\"100%\"><tr><td>Dist</td><td>class</td><td><input type=\"checkbox\" checked=\"checked\" name=\"mullist[" . $i . "]\" value=\"" . $att_names_hh[2][$i][$j] . "\"></td></tr></table>" ;
-			//echo $att_names_hh[2][$i][$j] . "--->" . $att_names_hh[2][$i][$j+1] . "<br>" ;
+			$m = $j + 2 ;
+			$n = $j + 3 ;
+			$loc_name = get_loc_name_by_id($att_names_hh[2][$i][$m], $con) ;
+			echo "<table border=\"1\" width=\"100%\"><tr><td>" . $loc_name . "</td><td>" . $att_names_hh[2][$i][$n] . "</td><td><input type=\"radio\" name=\"mullist[" . $l . "]\" value=\"" . $att_names_hh[2][$i][$j] . "\" checked></td></tr></table>" ;
+			//echo "<table border=\"1\" width=\"100%\"><tr><td>Dist</td><td>class</td><td><input type=\"radio\" name=\"mullist[" . $l . "]\" value=\"" . $att_names_hh[2][$i][$j] . "\" checked></td></tr></table>" ;
 		}
 		echo "</td>" ;
 		echo "<td><input type=\"checkbox\" checked=\"checked\" name=\"mullist[" . $k . "]\" value=\"" . $att_names_hh[2][$i][0] . "\"></td>" ;
@@ -210,6 +213,25 @@ function print_confirm_att_names_forms($att_names_hh, $att_d, $vt_id, $att_r)
 
 	echo "<br><br><input type=\"submit\" name=\"att_add_c\" value=\"送出\">\n" ;
 	echo "</form>" ;
+}
+
+function get_loc_name_by_id($id, $con)
+{
+	$sql = "SELECT name FROM class_location WHERE id=$id" ;
+	if(!$result = $con->query($sql))
+	{
+		echo 'query name from class_location failed' ;
+		echo $sql ;
+		exit ;
+	} else {
+		if($result->num_rows > 0)
+		{
+			$row = $result->fetch_assoc() ;
+			return $row['name'] ;
+		} else {
+			return 'unknow' ;
+		}
+	}
 }
 
 function check_attnames($names, $con)
@@ -239,6 +261,8 @@ function check_attnames($names, $con)
 				$names_h[1][$si_count][] = $names_a[$i] ;
 				$names_h[1][$si_count][] = $row['id'] ;
 				$names_h[1][$si_count][] = $row['name'] ;
+				$names_h[1][$si_count][] = $row['location'] ;
+				$names_h[1][$si_count][] = $row['class_num'] ;
 			}
 			if($result->num_rows > 1)
 			{
@@ -247,6 +271,8 @@ function check_attnames($names, $con)
 				while ($row = $result->fetch_assoc()) {
 					$names_h[2][$du_count][] = $row['id'] ;
 					$names_h[2][$du_count][] = $row['name'] ;
+					$names_h[2][$du_count][] = $row['location'] ;
+					$names_h[2][$du_count][] = $row['class_num'] ;
 				}
 			}
 		}
