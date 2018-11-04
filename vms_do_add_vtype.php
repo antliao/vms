@@ -36,14 +36,14 @@ function doadd_vtype($con)
 		{
 			echo "<br>" . $sql . "<br>" ; 
 			echo "執行新增工作群組失敗" ;
-			echo '<meta http-equiv=REFRESH CONTENT=2;url="vms_vtype.php">' ;
+			echo '<meta http-equiv=REFRESH CONTENT=2;url="vms_man.php">' ;
 		} else {
 			echo "新增工作群組成功" ;
-			echo '<meta http-equiv=REFRESH CONTENT=2;url="vms_vtype.php">' ;
+			echo '<meta http-equiv=REFRESH CONTENT=2;url="vms_man.php">' ;
 		}
 	} else {
 		echo "填寫資料不完整, 新增工作群組失敗" ;
-		echo '<meta http-equiv=REFRESH CONTENT=2;url="vms_vtype.php">' ;
+		echo '<meta http-equiv=REFRESH CONTENT=2;url="vms_man.php">' ;
 	}
 }
 

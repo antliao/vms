@@ -27,7 +27,7 @@ CREATE TABLE `vms_db`.`volun_man`
 ( `id` INT NOT NULL AUTO_INCREMENT , 
   `name` VARCHAR(30) NOT NULL , 
   `sex` INT NOT NULL DEFAULT '-1', 
-  `location` VARCHAR(50) NULL , 
+  `location` INT NULL , 
   `class_num` INT NULL , 
   `status` INT NOT NULL DEFAULT '1' , 
   `remark` TEXT NULL ,
