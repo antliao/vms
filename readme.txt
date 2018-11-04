@@ -14,6 +14,12 @@ Install VMS in Ubuntu16.04
 		3. a2enmod ssl 
 		4. service apache2 restart
 
+3. create table 'vms_db_tables.sql'
+4. create user account(direct insert in mysql)
+5. Warning!!! This initiation step only can be run that all the tables are just
+   created.
+   login vms and run vms_init.php to insert default data
+
 
 20181103
 1. class table, location table. for example, 台北 39 期
