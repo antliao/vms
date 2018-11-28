@@ -221,8 +221,8 @@ function get_loc_name_by_id($id, $con)
 	if(!$result = $con->query($sql))
 	{
 		echo 'query name from class_location failed' ;
-		echo $sql ;
-		exit ;
+		//echo $sql ;
+		//exit ;
 	} else {
 		if($result->num_rows > 0)
 		{
