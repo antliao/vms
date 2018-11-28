@@ -84,10 +84,11 @@ function query_single_form($con)
 	echo "<tbody>\n" ;
 	echo "<tr><td>姓名</td><td>起日</td><td>迄日</td></tr>\n" ;
 
-	echo "<tr><td><select name=\"volun_man_id\">" ;
-	print_volun_man_name_opt($con) ;
-	echo "</select></td>" ;
+	#echo "<tr><td><select name=\"volun_man_id\">" ;
+	#print_volun_man_name_opt($con) ;
+	#echo "</select></td>" ;
 
+	echo "<td><input type=\"text\" name=\"volun_man_name\" maxlength=\"20\"</td>" ;
 	echo "<td><input type=\"text\" id=\"sfrom\" readonly=\"readonly\" name=\"s_date\" maxlength=\"20\"</td>" ;
 	echo "<td><input type=\"text\" id=\"sto\" readonly=\"readonly\" name=\"e_date\" maxlength=\"20\"</td>" ;
 
@@ -100,13 +101,16 @@ function query_single_form($con)
 function show_single_query($con, $vtypeA)
 {
 	$button = $_POST['qsingle'] ;
-	$volun_man_id = $_POST['volun_man_id'] ;
+	#$volun_man_id = $_POST['volun_man_id'] ;
+	$volun_man_name = $_POST['volun_man_name'] ;
 	$sdate = $_POST['s_date'] ;
 	$edate = $_POST['e_date'] ;
 
-	if($button == null || $volun_man_id == null || $sdate == null || $edate == null)
+	#if($button == null || $volun_man_id == null || $sdate == null || $edate == null)
+	if($button == null || $volun_man_name == null || $sdate == null || $edate == null)
 		return ;
 
+	$volun_man_id = get_member_id_by_name($con, $volun_man_name) ;
 
 	$sql = "SELECT * FROM volun_atten WHERE date BETWEEN '$sdate' AND '$edate' AND volun_man_id = '$volun_man_id' ORDER BY date" ;
 	//echo $sql ;
@@ -134,6 +138,25 @@ function show_single_query($con, $vtypeA)
 		    echo "<center>\n" ;
 			echo '<br><br><hr><h3>義工：' . $volun_man_id . '於&nbsp;&nbsp;' . $sdate . '&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;' . $edate . '&nbsp;&nbsp;間無工作紀錄</h3><br>' ;
 			echo "</center>\n" ;
+		}
+	}
+}
+
+function get_member_id_by_name($con, $name)
+{
+	$sql = "SELECT id FROM volun_man WHERE name='$name'" ;
+	if(!$result = $con->query($sql))
+	{
+		echo 'query name from volun_man failed' ;
+		exit ;
+	} else {
+		if($result->num_rows > 0)
+		{
+			$row = $result->fetch_assoc() ;
+			return $row['id'] ;
+		} else {
+			echo 'no such name in volun_man' ;
+			exit ;
 		}
 	}
 }
